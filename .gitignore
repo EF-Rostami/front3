@@ -39,3 +39,36 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+*.txt
+*.node_modules
+*.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+
+# Optional: TypeScript build output
+*.tsbuildinfo
+
+# Optional: test coverage
+coverage/
+
+# Optional: local data or cache folders
+.cache/
+.next/cache/
+
+# Optional: if using Docker
+docker-compose.override.yml
+docker-data/
+
+# Optional: if using eslint or prettier cache
+.eslintcache
+.prettiercache
+
+# Optional: if using VSCode settings sync or extensions
+.history/
