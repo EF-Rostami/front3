@@ -25,7 +25,7 @@ export default function ResetPasswordPage() {
     }
 
     // Verify token
-    fetch(`http://localhost:8000/auth/verify-reset-token/${token}`)
+    fetch(`${process.env.API_BASE_URL}/auth/verify-reset-token/${token}`)
       .then((res) => {
         if (!res.ok) throw new Error('Invalid or expired token');
         return res.json();
@@ -57,7 +57,7 @@ export default function ResetPasswordPage() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/auth/reset-password', {
+      const response = await fetch(`${process.env.API_BASE_URL}/auth/reset-password`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, new_password: password }),
