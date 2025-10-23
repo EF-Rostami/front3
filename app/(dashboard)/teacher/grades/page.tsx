@@ -5,6 +5,8 @@ import { RoleGuard } from "@/app/components/RoleGuard";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from 'react';
+
 
 interface Class {
   id: number;
@@ -37,7 +39,7 @@ interface Grade {
   graded_at: string;
 }
 
-export default function GradesPage() {
+function GradesContent() {
   const searchParams = useSearchParams();
   const classIdParam = searchParams.get('classId');
   const studentIdParam = searchParams.get('studentId');
@@ -561,5 +563,23 @@ export default function GradesPage() {
         </div>
       </div>
     </RoleGuard>
+  );
+}
+
+// Loading fallback
+function LoadingGrades() {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+    </div>
+  );
+}
+
+// Main page - export this as default
+export default function GradesPage() {
+  return (
+    <Suspense fallback={<LoadingGrades />}>
+      <GradesContent />
+    </Suspense>
   );
 }
