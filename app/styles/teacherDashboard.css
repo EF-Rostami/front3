@@ -1,0 +1,328 @@
+/* src/styles/teacherDashboard.css */
+.teacher-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .teacher-dashboard h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .stats-cards {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .stats-cards .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .stats-cards .card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .stats-cards .card .value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .attendance-section, .exams-section {
+    margin-top: 2rem;
+  }
+  
+  .attendance-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .attendance-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    border-radius: 8px;
+    width: 48%;
+  }
+  
+  .attendance-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .attendance-stats .stat-item {
+    flex: 1 1 45%;
+  }
+  
+  .exam-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .exam-item h3 {
+    font-size: 1.3rem;
+  }
+  
+  .exam-item .exam-date {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .view-all-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 2rem;
+  }
+  
+  .view-all-link:hover {
+    background-color: #0056b3;
+  }
+  
+
+  /* src/pages/teacher/TeacherDashboard.css */
+
+.teacher-dashboard {
+    padding: 2rem;
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .teacher-dashboard h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .teacher-dashboard p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .academic-year {
+    font-weight: 500;
+    color: #555;
+    margin-top: 0.5rem;
+  }
+  
+  .stats-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .stats-cards .card {
+    flex: 1;
+    min-width: 200px;
+    padding: 1.5rem;
+    background-color: #f9fafb; /* Light grey background */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .stats-cards .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .stats-cards .card h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #333;
+  }
+  
+  .stats-cards .card .value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2563eb; /* blue-600 */
+  }
+  
+  .attendance-section, .exams-section {
+    margin-top: 3rem;
+  }
+  
+  .attendance-section h2, .exams-section h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .attendance-cards, .exams-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .attendance-card, .exam-item {
+    background-color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .attendance-card:hover, .exam-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .attendance-card h3, .exam-item h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.75rem;
+  }
+  
+  .attendance-stats, .exam-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .stat-item, .exam-details p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+  }
+  
+  .stat-item .label, .exam-details p {
+    color: #777;
+  }
+  
+  .stat-item .value, .exam-details .value {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 1rem;
+  }
+  
+  .primary {
+    background-color: #2563eb; /* blue-600 */
+    color: #ffffff;
+  }
+  
+  .secondary {
+    background-color: #f43f5e; /* red-600 */
+    color: #ffffff;
+  }
+  
+  .view-all-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #2563eb;
+    text-decoration: none;
+  }
+  
+  .view-all-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .stats-cards {
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+  
+    .stats-cards .card {
+      width: 100%;
+      min-width: auto;
+      text-align: center;
+    }
+  
+    .attendance-cards, .exams-list {
+      flex-direction: column;
+    }
+  
+    .attendance-card, .exam-item {
+      width: 100%;
+    }
+  
+    .attendance-stats .stat-item, .exam-details p {
+      font-size: 0.9rem;
+    }
+  
+    .attendance-card h3, .exam-item h3 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  /* src/styles/teacherDashboard.css */
+.teacher-dashboard {
+    max-width: 100%; /* Ensure the dashboard does not overflow */
+    margin: 0 auto;
+  }
+  
+  .teacher-dashboard h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .stats-cards {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .stats-cards .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .stats-cards .card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .stats-cards .card .value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  .teacher-container {
+    display: flex;
+    flex-direction: row; /* Ensure the sidebar and main content are side by side */
+    gap: 20px; /* Add some spacing between sidebar and content */
+  }
+  
+  .teacher-content {
+    flex-grow: 1; /* This ensures the main content takes up the remaining space */
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
