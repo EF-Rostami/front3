@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    experimental: {
-    dynamicIO: true
-  }
+/ your other configurations if any
 };
 
 export default nextConfig;
