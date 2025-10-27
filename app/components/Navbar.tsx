@@ -99,6 +99,7 @@ const Navbar = ({  userRole }: NavbarProps) => {
               alt="App Logo"
               width={120}
               height={50}
+              style={{ height: 'auto' }}
               priority
             />
             <span>School Management</span>

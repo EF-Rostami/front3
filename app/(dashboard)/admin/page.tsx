@@ -16,6 +16,7 @@ interface DashboardStats {
 }
 
 export default function AdminPage() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { user, getFullName, logout } = useAuthStore();
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [loading, setLoading] = useState(true);
@@ -139,7 +140,7 @@ export default function AdminPage() {
     <RoleGuard allowedRoles={['admin']}>
       <div className="min-h-screen bg-white">
          <DashboardHeader
-          title="SCHULVERWALTUNGSSYSTEM!!!!!!!!!!!!"
+          title="SCHULVERWALTUNGSSYSTEM"
           subtitle="Administrator Control Panel"
         />
 

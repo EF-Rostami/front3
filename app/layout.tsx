@@ -1,5 +1,6 @@
 // import { ZustandDebugger } from "./components/ZustandDebugger";
 import { DebugAuthStore } from '@/app/components/DebugAuthStore';
+import WakeBackend from './components/WakeBackend';
 
 
 
@@ -9,6 +10,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
     <html lang="en">
 
       <body>
+        <WakeBackend /> 
         <div className="flex flex-col min-h-screen">   
   
           <main className="flex-1">{children}</main>

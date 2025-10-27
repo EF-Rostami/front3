@@ -132,7 +132,7 @@ export default function DashboardHeader({
             </div>
 
             {/* Desktop logout button (optional) */}
-            {!showBackButton && <LogoutButton onClick={handleLogout} className="hidden sm:block self-start sm:self-center" />}
+            {/* {!showBackButton && <LogoutButton onClick={handleLogout} className="hidden sm:block self-start sm:self-center" />} */}
           </div>
         </div>
       </header>

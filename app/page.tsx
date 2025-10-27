@@ -12,7 +12,7 @@ export default function Home(){
       {/* Hero section */}
       <section className="hero-section">
         <div className="hero-content px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl">Welcome to Our School!</h1>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl">Welcome to Our School</h1>
           <p className="hero-subtitle text-base sm:text-lg lg:text-xl">
             Educating and inspiring the leaders of tomorrow
           </p>

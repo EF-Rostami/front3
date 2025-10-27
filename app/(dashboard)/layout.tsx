@@ -2,30 +2,30 @@
 
 import React, { useState } from "react";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import DashboardHeader from "../components/Header";
+// import Link from "next/link";
+// import { usePathname } from "next/navigation";
+// import DashboardHeader from "../components/Header";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   // Sidebar links
-  const links = [
-    { title: "Dashboard", href: "/dashboard", icon: "🏠" },
-    { title: "Students", href: "/dashboard/students", icon: "👤" },
-    { title: "Teachers", href: "/dashboard/teachers", icon: "👨‍🏫" },
-    { title: "Classes", href: "/dashboard/classes", icon: "🏫" },
-    { title: "Courses", href: "/dashboard/courses", icon: "📚" },
-    { title: "Attendance", href: "/dashboard/attendance", icon: "🗓️" },
-    { title: "Fees", href: "/dashboard/fees", icon: "💰" },
-    { title: "Reports", href: "/dashboard/reports", icon: "📈" },
-  ];
+  // const links = [
+  //   { title: "Dashboard", href: "/dashboard", icon: "🏠" },
+  //   { title: "Students", href: "/dashboard/students", icon: "👤" },
+  //   { title: "Teachers", href: "/dashboard/teachers", icon: "👨‍🏫" },
+  //   { title: "Classes", href: "/dashboard/classes", icon: "🏫" },
+  //   { title: "Courses", href: "/dashboard/courses", icon: "📚" },
+  //   { title: "Attendance", href: "/dashboard/attendance", icon: "🗓️" },
+  //   { title: "Fees", href: "/dashboard/fees", icon: "💰" },
+  //   { title: "Reports", href: "/dashboard/reports", icon: "📈" },
+  // ];
 
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside
+      {/* <aside
         className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} sm:translate-x-0 sm:static sm:flex-shrink-0`}
       >
@@ -46,19 +46,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             </Link>
           ))}
         </nav>
-      </aside>
+      </aside> */}
 
       {/* Main content */}
       <div className="flex-1 flex flex-col sm:ml-64">
         {/* Header */}
-        <DashboardHeader
+        {/* <DashboardHeader
           title="Dashboard"
           showBackButton={false}
           backButtonUrl="/dashboard"
           backButtonText="Zurück"
         >
           {/* Optional: pass extra props if needed */}
-        </DashboardHeader>
+        {/* </DashboardHeader> */} *
 
         {/* Page content */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6">{children}</main>
