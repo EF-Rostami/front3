@@ -244,5 +244,4 @@ export default function ResetPasswordPage() {
     <Suspense fallback={<LoadingResetPassword />}>
       <ResetPasswordForm />
     </Suspense>
-  );
-}
+  );}
