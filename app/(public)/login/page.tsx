@@ -30,6 +30,8 @@ export default function LoginPage() {
   const [availableRoles, setAvailableRoles] = useState<string[]>([]);
   const [selectedRole, setSelectedRole] = useState<string>("");
   const [isRedirecting, setIsRedirecting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [loginAttempts, setLoginAttempts] = useState(0);
   
   // Access store values
   const login = useAuthStore((state) => state.login);
@@ -53,12 +55,34 @@ export default function LoginPage() {
     }
   }, [hasHydrated, isAuthenticated, user, storedRole, router]);
 
+  // Clear error when user types
+  useEffect(() => {
+    if (errorMessage) {
+      setErrorMessage("");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email, password]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Clear previous errors
+    setErrorMessage("");
+
     // Client-side validation
     if (!email.trim() || !password.trim()) {
-      toast.error('Please fill in all fields.');
+      const error = 'Please fill in all fields.';
+      setErrorMessage(error);
+      toast.error(error);
+      return;
+    }
+
+    // Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      const error = 'Please enter a valid email address.';
+      setErrorMessage(error);
+      toast.error(error);
       return;
     }
 
@@ -68,8 +92,13 @@ export default function LoginPage() {
       const user = await login(email, password);
       const roles = user.roles ?? [];
 
+      // Reset login attempts on success
+      setLoginAttempts(0);
+
       if (roles.length === 0) {
-        toast.error('No valid role assigned. Please contact your administrator.');
+        const error = 'No valid role assigned. Please contact your administrator.';
+        setErrorMessage(error);
+        toast.error(error);
         setIsLoading(false);
         return;
       }
@@ -83,7 +112,9 @@ export default function LoginPage() {
           setIsRedirecting(true);
           setTimeout(() => router.push(route), 300);
         } else {
-          toast.error('Invalid role configuration.');
+          const error = 'Invalid role configuration. Please contact support.';
+          setErrorMessage(error);
+          toast.error(error);
           setIsLoading(false);
         }
       } else {
@@ -94,10 +125,49 @@ export default function LoginPage() {
       }
     } catch (error: unknown) {
       setIsLoading(false);
+      setLoginAttempts(prev => prev + 1);
+      
+      let errorMsg = 'An unexpected error occurred. Please try again.';
+      
       if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error('Login failed. Please check your credentials and try again.');
+        // Handle specific error messages
+        const message = error.message.toLowerCase();
+        
+        if (message.includes('invalid') || message.includes('incorrect') || 
+            message.includes('wrong') || message.includes('credentials')) {
+          errorMsg = 'Invalid email or password. Please check your credentials and try again.';
+        } else if (message.includes('network') || message.includes('fetch')) {
+          errorMsg = 'Network error. Please check your internet connection and try again.';
+        } else if (message.includes('timeout')) {
+          errorMsg = 'Request timed out. Please try again.';
+        } else if (message.includes('unauthorized') || message.includes('401')) {
+          errorMsg = 'Invalid email or password. Please try again.';
+        } else if (message.includes('forbidden') || message.includes('403')) {
+          errorMsg = 'Access denied. Your account may be disabled.';
+        } else if (message.includes('not found') || message.includes('404')) {
+          errorMsg = 'User not found. Please check your email address.';
+        } else if (message.includes('server') || message.includes('500')) {
+          errorMsg = 'Server error. Please try again later.';
+        } else if (message.includes('too many')) {
+          errorMsg = 'Too many login attempts. Please try again later.';
+        } else {
+          // Use the original error message if it's informative
+          errorMsg = error.message || errorMsg;
+        }
+      }
+
+      setErrorMessage(errorMsg);
+      toast.error(errorMsg, {
+        duration: 5000,
+      });
+
+      // Show additional help after multiple failed attempts
+      if (loginAttempts >= 2) {
+        setTimeout(() => {
+          toast.info('Having trouble signing in? Try resetting your password.', {
+            duration: 7000,
+          });
+        }, 1000);
       }
     }
   };
@@ -203,6 +273,36 @@ export default function LoginPage() {
           <p className="text-gray-600 mt-2">Sign in to your account</p>
         </div>
 
+        {/* Error Alert */}
+        {errorMessage && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 animate-fade-in">
+            <svg 
+              className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" 
+              />
+            </svg>
+            <div className="flex-1">
+              <p className="text-sm font-medium text-red-800">{errorMessage}</p>
+            </div>
+            <button
+              onClick={() => setErrorMessage("")}
+              className="text-red-500 hover:text-red-700 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -214,7 +314,9 @@ export default function LoginPage() {
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+              className={`w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition ${
+                errorMessage ? 'border-red-300' : 'border-gray-300'
+              }`}
               required
               disabled={isLoading}
               autoComplete="email"
@@ -232,7 +334,9 @@ export default function LoginPage() {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border border-gray-300 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition pr-12"
+                className={`w-full border px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition pr-12 ${
+                  errorMessage ? 'border-red-300' : 'border-gray-300'
+                }`}
                 required
                 disabled={isLoading}
                 autoComplete="current-password"
@@ -291,6 +395,19 @@ export default function LoginPage() {
             )}
           </button>
         </form>
+
+        {/* Help Text */}
+        {loginAttempts >= 2 && (
+          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-sm text-blue-800">
+              <strong>Need help?</strong> If you&apos;re having trouble signing in, try{" "}
+              <Link href="/auth/forgot-password" className="font-medium underline hover:text-blue-600">
+                resetting your password
+              </Link>
+              {" "}or contact support.
+            </p>
+          </div>
+        )}
 
         {/* <div className="mt-6 text-center text-sm text-gray-600">
           Don&apos;t have an account?{" "}

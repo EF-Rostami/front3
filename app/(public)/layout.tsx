@@ -1,11 +1,30 @@
+// import { ZustandDebugger } from "./components/ZustandDebugger";
+
+import "../globals.css";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import WakeBackend from "../components/WakeBackend";
 
 
-export default function PublicLayout({ children }: { children: React.ReactNode }) {
+
+export default function HomeLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <html lang="en">
 
-      <main className="flex-1">{children}</main>
-   
-    </div>
+      <body>
+        <div className="flex flex-col min-h-screen">   
+          <WakeBackend /> 
+          {/* // wakeup backend in render */}
+          <Navbar  userRole={null} />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>
+
+      </body>
+    </html>
+
   );
 }
+
+
+// <ZustandDebugger />

@@ -5,6 +5,7 @@ import { RoleGuard } from "@/app/components/RoleGuard";
 import { useAuthStore } from "@/app/stores/auth.store";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import DashboardHeader from "@/app/components/Header";
 
 interface DashboardStats {
   total_students: number;
@@ -87,35 +88,35 @@ export default function AdminPage() {
       title: "Anwesenheit", 
       description: "Anwesenheitsübersicht und Berichte",
       href: "/admin/attendance",
-      icon: "📊",
+      icon: "🗓️",
       count: 0
     },
     { 
       title: "Admission", 
       description: "Admission for new students",
       href: "/admin/admissions",
-      icon: "📊",
+      icon: "🎓",
       count: 0
     },
     { 
       title: "Admission letter", 
       description: "Admission letter for new students",
       href: "/admin/admissions/letters",
-      icon: "📊",
+      icon: "✉️",
       count: 0
     },
     { 
       title: "Absence-Excuse", 
       description: "Absence Excuse Page",
       href: "/admin/absence-excuses",
-      icon: "📊",
+      icon: "📄",
       count: 0
     },
     { 
       title: "Events", 
       description: "Events Page",
       href: "/events",
-      icon: "📊",
+      icon: "🎉",
       count: 0
     },
     { 
@@ -137,31 +138,10 @@ export default function AdminPage() {
   return (
     <RoleGuard allowedRoles={['admin']}>
       <div className="min-h-screen bg-white">
-        {/* Header */}
-        <header className="border-b-2 border-black bg-white">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold text-black tracking-tight">
-                  SCHULVERWALTUNGSSYSTEM
-                </h1>
-                <p className="text-sm text-gray-600 mt-1">Administrator Control Panel</p>
-              </div>
-              <div className="flex items-center space-x-6">
-                <div className="text-right">
-                  <p className="text-sm font-semibold text-black">{getFullName()}</p>
-                  <p className="text-xs text-gray-500">{user?.email}</p>
-                </div>
-                <button
-                  onClick={logout}
-                  className="px-4 py-2 border-2 border-black text-black font-semibold hover:bg-black hover:text-white transition-colors"
-                >
-                  ABMELDEN
-                </button>
-              </div>
-            </div>
-          </div>
-        </header>
+         <DashboardHeader
+          title="SCHULVERWALTUNGSSYSTEM!!!!!!!!!!!!"
+          subtitle="Administrator Control Panel"
+        />
 
         {/* Main Content */}
         <main className="max-w-7xl mx-auto px-6 py-8">
